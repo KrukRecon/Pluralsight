@@ -6,23 +6,39 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            string firstName = "Bethany";
-            string lastName = "Smith";
+            int monthlyWage = 6000;
+            int months = 6;
 
-            string fullName = firstName + " " + lastName;
-            string employeeIdentification = string.Concat(firstName, lastName);
+            //CalcualteYearlyWage(monthlyWage, months);
+            int yearlyWage = CalcualteYearlyWage(monthlyWage, months);
+            CalculateAverageWage(1, 3, 5, 7);
+            CalculateAverageWage(1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 1235, 3245, 13, 4231, 43, 123, 1);
 
-            string empId = firstName.ToLower() + "-" + lastName.ToLower();
-            string filePath = @"C:\x\d";
-
-            int x = 5;
-            int y = x;
-            x += 5;
-
-            Console.WriteLine(filePath);
-            Console.WriteLine(x);
-            Console.WriteLine(y);
             Console.ReadLine();
+        }
+
+        public static int CalcualteYearlyWage(int monthlyWage, int numberOfMonthsWorked)
+        {
+            //Console.WriteLine($"Yearly wage: {monthlyWage * numberOfMonthsWorked}");
+            if (numberOfMonthsWorked == 12)
+            {
+                return monthlyWage * (numberOfMonthsWorked + 1);
+            }
+
+            return monthlyWage * numberOfMonthsWorked;
+        }
+        private static int CalculateAverageWage(params int[] wages)
+        {
+            int total = 0;
+            int numberOfWages = wages.Length;
+
+            for (int i = 0; i < numberOfWages; i++)
+            {
+                total += wages[i];
+            }
+
+            Console.WriteLine(total / numberOfWages);
+            return total / numberOfWages;
         }
     }
 }
