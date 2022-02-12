@@ -6,40 +6,75 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            int monthlyWage = 6000;
-            int months = 6;
-
-            //CalcualteYearlyWage(monthlyWage, months);
-            int yearlyWage = CalcualteYearlyWage(monthlyWage, months);
-            CalculateAverageWage(1, 3, 5, 7);
-            CalculateAverageWage(1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 1235, 3245, 13, 4231, 43, 123, 1);
+            UsingEnumerations();
+            UsingStruct();
 
             Console.ReadLine();
         }
 
-        public static int CalcualteYearlyWage(int monthlyWage, int numberOfMonthsWorked)
+        private static void UsingStruct()
         {
-            //Console.WriteLine($"Yearly wage: {monthlyWage * numberOfMonthsWorked}");
-            if (numberOfMonthsWorked == 12)
+            Employee employee;
+            employee.Name = "Bethany";
+            employee.Wage = 1250;
+            employee.Work();
+        }
+
+        private static void UsingEnumerations()
+        {
+            EmployeeType employeeType = EmployeeType.Manager;
+            StoreType storeType = StoreType.Seating;
+            int baseWage = 6000;
+
+            CalculateWage(baseWage, employeeType, storeType);
+        }
+
+        private static void CalculateWage(int baseWage, EmployeeType employeeType, StoreType storeType)
+        {
+            int calculateWage = 0;
+
+            if (employeeType == EmployeeType.Manager)
             {
-                return monthlyWage * (numberOfMonthsWorked + 1);
+                calculateWage = baseWage * 3;
+            }
+            else
+            {
+                calculateWage = baseWage * 2;
             }
 
-            return monthlyWage * numberOfMonthsWorked;
-        }
-        private static int CalculateAverageWage(params int[] wages)
-        {
-            int total = 0;
-            int numberOfWages = wages.Length;
-
-            for (int i = 0; i < numberOfWages; i++)
+            if (storeType == StoreType.FullPieRestaurant)
             {
-                total += wages[i];
+                calculateWage += 500;
             }
 
-            Console.WriteLine(total / numberOfWages);
-            return total / numberOfWages;
+            Console.WriteLine($"The calculated wage is: {calculateWage}");
         }
+    }
+
+    struct Employee
+    {
+        public string Name;
+        public int Wage;
+
+        public void Work()
+        {
+            Console.WriteLine($"{Name} is now working");
+        }
+    }
+
+    enum EmployeeType
+    {
+        Sales,//0
+        Manager,//1
+        Research,//2
+        StoreManager,//3
+    }
+    enum StoreType
+    {
+        PieCorner = 10,
+        Seating = 20,
+        FullPieRestaurant = 100,
+        Undefined = 99,
     }
 }
  
