@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BethanysPieShopHRM.HR;
+using System;
 
 namespace BethanysPieShopHRM
 {
